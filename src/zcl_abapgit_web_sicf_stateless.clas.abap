@@ -11,7 +11,7 @@ CLASS zcl_abapgit_web_sicf_stateless IMPLEMENTATION.
 
     server->response->set_header_field(
       name  = 'Content-Type'
-      value = 'text/html' ).
+      value = 'text/plain' ).
     server->response->set_header_field(
       name  = 'Expires'
       value = '0' ).
@@ -22,8 +22,6 @@ CLASS zcl_abapgit_web_sicf_stateless IMPLEMENTATION.
           iv_value = sy-uname ).
       CATCH zcx_abapgit_not_found.
     ENDTRY.
-
-    lv_data = '<html><body>hello world' && lv_data && '</body></html>'.
 
     server->response->set_cdata( lv_data ).
 

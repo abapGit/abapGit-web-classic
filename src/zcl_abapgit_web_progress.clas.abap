@@ -3,6 +3,8 @@ CLASS zcl_abapgit_web_progress DEFINITION PUBLIC FINAL CREATE PUBLIC.
   PUBLIC SECTION.
     INTERFACES zif_abapgit_progress.
 
+    CONSTANTS c_type TYPE zif_abapgit_persistence=>ty_type VALUE 'PROGRESS'.
+
   PROTECTED SECTION.
 
   PRIVATE SECTION.
@@ -17,7 +19,7 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
   METHOD zif_abapgit_progress~show.
 
     zcl_abapgit_persistence_db=>get_instance( )->modify(
-      iv_type  = 'PROGRESS'
+      iv_type  = c_type
       iv_value = sy-uname
       iv_data  = iv_text ).
 
@@ -32,7 +34,7 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
   METHOD zif_abapgit_progress~off.
 
     zcl_abapgit_persistence_db=>get_instance( )->delete(
-      iv_type  = 'PROGRESS'
+      iv_type  = c_type
       iv_value = sy-uname ).
 
   ENDMETHOD.

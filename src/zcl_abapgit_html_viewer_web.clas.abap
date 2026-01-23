@@ -84,7 +84,7 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |  const forms = document.getElementsByTagName("form");   \n| &&
       |  for (let i = 0; i < forms.length; i++) \{              \n| &&
       |    if (forms[i].action.startsWith("sapevent:")) \{\n| &&
-      |      console.log("abapGit: reqwrite form action " + forms[i].action);\n| &&
+      |      console.log("abapGit: rewrite form action " + forms[i].action);\n| &&
       |      forms[i].action = "./" + forms[i].action;            \n| &&
       |    \}                                                     \n| &&
       |  \}                                                     \n| &&
@@ -105,6 +105,7 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
     ELSEIF lv_path = '/sap/zabapgit/' OR lv_path CP |/sap/zabapgit/sapevent:+*|.
       REPLACE FIRST OCCURRENCE OF |</body>| IN mv_html WITH lv_js.
       mi_response->set_content_type( 'text/html' ).
+      REPLACE ALL OCCURRENCES OF '|"sapevent:|' IN mv_html WITH |"./sapevent:|.
       mi_response->set_cdata( mv_html ).
     ELSE.
       mi_response->set_content_type( 'text/html' ).

@@ -12,6 +12,7 @@ CLASS zcl_abapgit_web DEFINITION
         zcx_abapgit_exception.
 
     CONSTANTS c_base      TYPE string VALUE '/sap/zabapgit/stateful/' ##NO_TEXT.
+    CONSTANTS c_stateless TYPE string VALUE '/sap/zabapgit/stateless/' ##NO_TEXT.
     CONSTANTS c_redirect  TYPE string VALUE '/sap/zabapgit' ##NO_TEXT.
 
   PROTECTED SECTION.

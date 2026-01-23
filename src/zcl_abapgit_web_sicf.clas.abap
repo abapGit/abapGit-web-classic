@@ -10,14 +10,19 @@ ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_WEB_SICF IMPLEMENTATION.
+CLASS zcl_abapgit_web_sicf IMPLEMENTATION.
 
 
   METHOD if_http_extension~handle_request.
 
     mi_server = server.
 
-    server->set_session_stateful( ).
+    server->set_session_stateful(
+      stateful = if_http_server=>co_enabled
+      path     = zcl_abapgit_web=>c_base ).
+    server->set_session_stateful(
+      stateful = if_http_server=>co_disabled
+      path     = zcl_abapgit_web=>c_stateless ).
 
     TRY.
         zcl_abapgit_web=>handle(

@@ -25,7 +25,7 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
 
 
   METHOD zif_abapgit_progress~set_total.
-* todo ???
+    mv_total = iv_total.
   ENDMETHOD.
 
 

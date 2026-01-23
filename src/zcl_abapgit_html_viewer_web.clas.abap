@@ -18,7 +18,7 @@ ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_HTML_VIEWER_WEB IMPLEMENTATION.
+CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
 
 
   METHOD constructor.
@@ -130,10 +130,11 @@ CLASS ZCL_ABAPGIT_HTML_VIEWER_WEB IMPLEMENTATION.
       |\};\n| &&
       |</script></body>\n|.
 
-    IF lv_path = '/sap/zabapgit/css/bundle.css'.
+    IF lv_path = zcl_abapgit_web=>c_base && 'css/bundle.css'.
       mi_response->set_content_type( 'text/css' ).
       mi_response->set_cdata( mv_css ).
-    ELSEIF lv_path = '/sap/zabapgit/' OR lv_path CP |/sap/zabapgit/sapevent:+*|.
+    ELSEIF lv_path = zcl_abapgit_web=>c_redirect && '/'
+        OR lv_path CP |{ zcl_abapgit_web=>c_redirect }/sapevent:+*|.
       REPLACE FIRST OCCURRENCE OF |</body>| IN mv_html WITH lv_js.
       mi_response->set_content_type( 'text/html' ).
 * note: fixing this on client side wont work for SSL/https connections, it gives a warning

@@ -40,6 +40,14 @@ CLASS zcl_abapgit_web_sicf IMPLEMENTATION.
 
     mi_server = server.
 
+    IF zif_abapgit_web_request~get_header_field( '~path' ) = '/sap/zabapgit/progress'.
+      server->set_session_stateful(
+        stateful = if_http_server=>co_disabled
+        path     = '/sap/zabapgit/progress' ).
+      server->response->set_cdata( 'zero' ).
+      RETURN.
+    ENDIF.
+
     server->set_session_stateful( ).
 
     TRY.

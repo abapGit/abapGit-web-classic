@@ -98,8 +98,14 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |\}                                                       \n| &&
       |registerForms();                                         \n| &&
       |                                                   \n| &&
+      |function checkForProgress() \{\n| &&
+      |  console.dir("checkForProgress");\n| &&
+      |  setTimeout(checkForProgress, 100);\n| &&
+      |\}\n| &&
+      |                                                   \n| &&
       |window.onbeforeunload = () => \{\n| &&
       |  console.dir("onbeforeunload"); \n| &&
+      |  setTimeout(checkForProgress, 100);\n| &&
       |\};\n| &&
       |window.onunload = () => \{\n| &&
       |  console.dir("onunload");\n| &&

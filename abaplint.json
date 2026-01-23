@@ -13,7 +13,12 @@
     {
       "url": "https://github.com/abaplint/deps",
       "files": "/src/**/*.*",
-      "folder": "/lint_deps"
+      "folder": "/lint_deps1"
+    },
+    {
+      "url": "https://github.com/abapGit/abapGit",
+      "files": "/src/**/*.*",
+      "folder": "/lint_deps2"
     }
   ],
   "syntax": {

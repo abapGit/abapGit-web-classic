@@ -90,6 +90,7 @@ CLASS zcl_abapgit_web IMPLEMENTATION.
       |   </body>\n| &&
       |</html>|.
 
+    gi_response->set_content_type( 'text/html' ).
     gi_response->set_cdata( lv_html ).
 
   ENDMETHOD.

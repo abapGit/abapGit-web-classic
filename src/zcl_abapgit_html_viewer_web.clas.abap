@@ -102,7 +102,7 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |                                                   \n| &&
       |function checkForProgress() \{\n| &&
       |  console.dir("checkForProgress");\n| &&
-      |  fetch("/sap/zabapgit/progress")\n| &&
+      |  fetch("/sap/zabapgit/progress", \{ keepalive: true \})\n| &&
       |    .then(response => response.text())\n| &&
       |    .then(data => \{\n| &&
       |      console.dir(data);\n| &&

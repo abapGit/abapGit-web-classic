@@ -105,7 +105,7 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
     ELSEIF lv_path = '/sap/zabapgit/' OR lv_path CP |/sap/zabapgit/sapevent:+*|.
       REPLACE FIRST OCCURRENCE OF |</body>| IN mv_html WITH lv_js.
       mi_response->set_content_type( 'text/html' ).
-      REPLACE ALL OCCURRENCES OF '|"sapevent:|' IN mv_html WITH |"./sapevent:|.
+      REPLACE ALL OCCURRENCES OF 'action="sapevent:' IN mv_html WITH 'action="./sapevent:'.
       mi_response->set_cdata( mv_html ).
     ELSE.
       mi_response->set_content_type( 'text/html' ).

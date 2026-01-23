@@ -21,7 +21,7 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
     DATA ls_content TYPE zabapgit.
     ls_content-type  = c_type.
     ls_content-value = sy-uname.
-    ls_content-data_str = iv_txt.
+    ls_content-data_str = iv_text.
 
     MODIFY zabapgit FROM ls_content.
 

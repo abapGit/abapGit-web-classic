@@ -101,11 +101,13 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |const PROGRESS_INTERVAL = 200;\n| &&
       |                                                   \n| &&
       |function checkForProgress() \{\n| &&
+      |  console.dir("checkForProgress");\n| &&
       |  fetch("/sap/zabapgit/progress")\n| &&
       |    .then(response => response.text())\n| &&
-      |    .then(data => console.dir(data));\n| &&
-      |  console.dir("checkForProgress");\n| &&
-      |  setTimeout(checkForProgress, PROGRESS_INTERVAL);\n| &&
+      |    .then(data => \{\n| &&
+      |      console.dir(data);\n| &&
+      |      setTimeout(checkForProgress, PROGRESS_INTERVAL);\n| &&
+      |    \});\n| &&
       |\}\n| &&
       |                                                   \n| &&
       |window.onbeforeunload = () => \{\n| &&

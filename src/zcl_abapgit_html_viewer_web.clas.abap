@@ -111,12 +111,46 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |                                                   \n| &&
       |const PROGRESS_INTERVAL = 200;\n| &&
       |                                                   \n| &&
+      |function getOrCreateProgressModal() \{\n| &&
+      |  let modal = document.getElementById("progressModal");\n| &&
+      |  if (!modal) \{\n| &&
+      |    modal = document.createElement("div");\n| &&
+      |    modal.id = "progressModal";\n| &&
+      |    modal.style.cssText = "display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;justify-content:center;align-items:center;";\n| &&
+      |    const content = document.createElement("div");\n| &&
+      |    content.id = "progressModalContent";\n| &&
+      |    content.style.cssText = "background:white;padding:20px;border-radius:8px;min-width:300px;text-align:center;box-shadow:0 4px 6px rgba(0,0,0,0.3);";\n| &&
+      |    modal.appendChild(content);\n| &&
+      |    document.body.appendChild(modal);\n| &&
+      |  \}\n| &&
+      |  return modal;\n| &&
+      |\}\n| &&
+      |                                                   \n| &&
+      |function showProgressModal(text) \{\n| &&
+      |  const modal = getOrCreateProgressModal();\n| &&
+      |  const content = document.getElementById("progressModalContent");\n| &&
+      |  content.textContent = text;\n| &&
+      |  modal.style.display = "flex";\n| &&
+      |\}\n| &&
+      |                                                   \n| &&
+      |function hideProgressModal() \{\n| &&
+      |  const modal = document.getElementById("progressModal");\n| &&
+      |  if (modal) \{\n| &&
+      |    modal.style.display = "none";\n| &&
+      |  \}\n| &&
+      |\}\n| &&
+      |                                                   \n| &&
       |function checkForProgress() \{\n| &&
       |  console.dir("checkForProgress");\n| &&
       |  fetch("/sap/zabapgit_statel", \{ keepalive: true \})\n| &&
       |    .then(response => response.text())\n| &&
       |    .then(data => \{\n| &&
       |      console.dir(data);\n| &&
+      |      if (data && data.trim() !== "") \{\n| &&
+      |        showProgressModal(data);\n| &&
+      |      \} else \{\n| &&
+      |        hideProgressModal();\n| &&
+      |      \}\n| &&
       |      setTimeout(checkForProgress, PROGRESS_INTERVAL);\n| &&
       |    \});\n| &&
       |\}\n| &&

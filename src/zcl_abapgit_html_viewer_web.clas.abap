@@ -18,7 +18,7 @@ ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_HTML_VIEWER_WEB IMPLEMENTATION.
+CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
 
 
   METHOD constructor.
@@ -113,7 +113,7 @@ CLASS ZCL_ABAPGIT_HTML_VIEWER_WEB IMPLEMENTATION.
       |                                                   \n| &&
       |function checkForProgress() \{\n| &&
       |  console.dir("checkForProgress");\n| &&
-      |  fetch("/sap/bc/ping", \{ keepalive: true \})\n| &&
+      |  fetch("/sap/zabapgit_stateless", \{ keepalive: true \})\n| &&
       |    .then(response => response.text())\n| &&
       |    .then(data => \{\n| &&
       |      console.dir(data);\n| &&

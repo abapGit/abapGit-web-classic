@@ -97,6 +97,12 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |  \}                                                     \n| &&
       |\}                                                       \n| &&
       |registerForms();                                         \n| &&
+      |window.onbeforeunload = () => \{\n| &&
+      |  console.dir("onbeforeunload"); \n| &&
+      |\};\n| &&
+      |window.onunload = () => \{\n| &&
+      |  console.dir("onunload");\n| &&
+      |\};\n| &&
       |</script></body>\n|.
 
     IF lv_path = '/sap/zabapgit/css/bundle.css'.

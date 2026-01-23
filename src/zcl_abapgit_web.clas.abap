@@ -43,7 +43,6 @@ CLASS zcl_abapgit_web IMPLEMENTATION.
     gi_response = ii_response.
 
     IF go_viewer IS INITIAL.
-      zcl_abapgit_web_setup=>setup( ).
 
       CREATE OBJECT go_viewer
         EXPORTING

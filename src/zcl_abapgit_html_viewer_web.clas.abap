@@ -17,32 +17,35 @@ CLASS zcl_abapgit_html_viewer_web DEFINITION PUBLIC FINAL CREATE PUBLIC.
 ENDCLASS.
 
 
-CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
+
+CLASS ZCL_ABAPGIT_HTML_VIEWER_WEB IMPLEMENTATION.
+
 
   METHOD constructor.
     mi_request = ii_request.
     mi_response = ii_response.
   ENDMETHOD.
 
+
   METHOD zif_abapgit_html_viewer~back.
     RETURN.
   ENDMETHOD.
+
 
   METHOD zif_abapgit_html_viewer~close_document.
     RETURN.
   ENDMETHOD.
 
+
   METHOD zif_abapgit_html_viewer~free.
     RETURN.
   ENDMETHOD.
 
-  METHOD zif_abapgit_html_viewer~set_focus.
-    RETURN.
-  ENDMETHOD.
 
   METHOD zif_abapgit_html_viewer~get_url.
     RETURN.
   ENDMETHOD.
+
 
   METHOD zif_abapgit_html_viewer~load_data.
 
@@ -54,13 +57,21 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
 
   ENDMETHOD.
 
+
+  METHOD zif_abapgit_html_viewer~set_focus.
+    RETURN.
+  ENDMETHOD.
+
+
   METHOD zif_abapgit_html_viewer~set_registered_events.
     RETURN.
   ENDMETHOD.
 
+
   METHOD zif_abapgit_html_viewer~set_visiblity.
     RETURN.
   ENDMETHOD.
+
 
   METHOD zif_abapgit_html_viewer~show_url.
 
@@ -102,7 +113,7 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |                                                   \n| &&
       |function checkForProgress() \{\n| &&
       |  console.dir("checkForProgress");\n| &&
-      |  fetch("/sap/zabapgit/progress", \{ keepalive: true \})\n| &&
+      |  fetch("/sap/bc/ping", \{ keepalive: true \})\n| &&
       |    .then(response => response.text())\n| &&
       |    .then(data => \{\n| &&
       |      console.dir(data);\n| &&

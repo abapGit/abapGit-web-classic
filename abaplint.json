@@ -70,13 +70,7 @@
     ]
   },
   "rules": {
-    "7bit_ascii": {
-      "exclude": [
-        "zcl_abapgit_git_commit.clas.testclasses.abap",
-        "zcl_abapgit_gui_event.clas.testclasses.abap",
-        "zcl_abapgit_html_action_utils.clas.testclasses.abap"
-      ]
-    },
+    "7bit_ascii": true,
     "abapdoc": false,
     "align_type_expressions": true,
     "align_pseudo_comments": false,
@@ -86,13 +80,13 @@
     "align_parameters": false,
     "allowed_object_naming": true,
     "allowed_object_types": {
-      "exclude": ["test/src/"],
       "allowed": [
         "CLAS",
         "DEVC",
         "FUGR",
         "INTF",
         "PROG",
+        "SICF",
         "TRAN",
         "W3MI"
       ]

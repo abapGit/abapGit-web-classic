@@ -18,13 +18,20 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
 
   METHOD zif_abapgit_progress~show.
 
-    zcl_abapgit_persistence_db=>get_instance( )->modify(
-      iv_type  = c_type
-      iv_value = sy-uname
-      iv_data  = iv_text ).
+    DATA ls_content TYPE zabapgit.
+    ls_content-type  = c_type.
+    ls_content-value = sy-uname.
+    ls_content-data_str = iv_txt.
 
-* and wait for releasing the lock
-    COMMIT WORK AND WAIT.
+    MODIFY zabapgit FROM ls_content.
+
+"     zcl_abapgit_persistence_db=>get_instance( )->modify(
+"       iv_type  = c_type
+"       iv_value = sy-uname
+"       iv_data  = iv_text ).
+
+" * and wait for releasing the lock
+"     COMMIT WORK AND WAIT.
 
   ENDMETHOD.
 
@@ -36,11 +43,11 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
 
   METHOD zif_abapgit_progress~off.
 
-    zcl_abapgit_persistence_db=>get_instance( )->delete(
-      iv_type  = c_type
-      iv_value = sy-uname ).
+    " zcl_abapgit_persistence_db=>get_instance( )->delete(
+    "   iv_type  = c_type
+    "   iv_value = sy-uname ).
 
-    COMMIT WORK AND WAIT.
+    " COMMIT WORK AND WAIT.
 
   ENDMETHOD.
 

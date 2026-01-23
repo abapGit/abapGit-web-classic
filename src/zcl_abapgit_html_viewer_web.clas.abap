@@ -83,7 +83,10 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |function registerForms() \{                              \n| &&
       |  const forms = document.getElementsByTagName("form");   \n| &&
       |  for (let i = 0; i < forms.length; i++) \{              \n| &&
-      |    forms[i].action = "./" + forms[i].action;            \n| &&
+      |    if (forms[i].action.startsWith("sapevent:")) \{\n| &&
+      |      console.log("abapGit: reqwrite form action " + forms[i].action);\n| &&
+      |      forms[i].action = "./" + forms[i].action;            \n| &&
+      |    \}                                                     \n| &&
       |  \}                                                     \n| &&
       |  const inputs = document.getElementsByTagName("input"); \n| &&
       |  for (let i = 0; i < inputs.length; i++) \{             \n| &&

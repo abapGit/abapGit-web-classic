@@ -23,6 +23,8 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
       iv_value = sy-uname
       iv_data  = iv_text ).
 
+    COMMIT WORK.
+
   ENDMETHOD.
 
 
@@ -36,6 +38,8 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
     zcl_abapgit_persistence_db=>get_instance( )->delete(
       iv_type  = c_type
       iv_value = sy-uname ).
+
+    COMMIT WORK.
 
   ENDMETHOD.
 

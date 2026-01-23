@@ -11,11 +11,10 @@ CLASS zcl_abapgit_web DEFINITION
       RAISING
         zcx_abapgit_exception.
 
-    CONSTANTS c_base      TYPE string VALUE '/sap/zabapgit/stateful/' ##NO_TEXT.
-    CONSTANTS c_stateless TYPE string VALUE '/sap/zabapgit/stateless/' ##NO_TEXT.
-    CONSTANTS c_redirect  TYPE string VALUE '/sap/zabapgit' ##NO_TEXT.
-
   PROTECTED SECTION.
+
+    CONSTANTS c_base      TYPE string VALUE '/sap/zabapgit/' ##NO_TEXT.
+
     CLASS-DATA go_viewer   TYPE REF TO zcl_abapgit_html_viewer_web .
     CLASS-DATA go_gui      TYPE REF TO zcl_abapgit_gui .
     CLASS-DATA gi_request  TYPE REF TO zif_abapgit_web_request.
@@ -60,7 +59,7 @@ CLASS zcl_abapgit_web IMPLEMENTATION.
     ENDIF.
 
     lv_path = cl_http_utility=>unescape_url( ii_request->get_header_field( '~path' ) ).
-    IF lv_path = c_redirect.
+    IF lv_path = '/sap/zabapgit'.
       redirect( ).
     ELSEIF lv_path = c_base.
       go_gui->go_home( zif_abapgit_definitions=>c_action-go_home ).

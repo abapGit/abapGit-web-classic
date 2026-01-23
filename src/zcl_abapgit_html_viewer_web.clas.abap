@@ -18,7 +18,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
+CLASS ZCL_ABAPGIT_HTML_VIEWER_WEB IMPLEMENTATION.
 
 
   METHOD constructor.
@@ -49,7 +49,7 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
 
   METHOD zif_abapgit_html_viewer~load_data.
 
-    IF iv_url CP '*css/bundle.css'.
+    IF iv_url = 'css/bundle.css'.
       CONCATENATE LINES OF ct_data_table INTO mv_css IN CHARACTER MODE RESPECTING BLANKS.
     ELSEIF iv_url = ''.
       CONCATENATE LINES OF ct_data_table INTO mv_html IN CHARACTER MODE RESPECTING BLANKS.
@@ -130,11 +130,10 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |\};\n| &&
       |</script></body>\n|.
 
-    IF lv_path = zcl_abapgit_web=>c_base && 'css/bundle.css'.
+    IF lv_path = '/sap/zabapgit/css/bundle.css'.
       mi_response->set_content_type( 'text/css' ).
       mi_response->set_cdata( mv_css ).
-    ELSEIF lv_path = zcl_abapgit_web=>c_base
-        OR lv_path CP |{ zcl_abapgit_web=>c_base }sapevent:+*|.
+    ELSEIF lv_path = '/sap/zabapgit/' OR lv_path CP |/sap/zabapgit/sapevent:+*|.
       REPLACE FIRST OCCURRENCE OF |</body>| IN mv_html WITH lv_js.
       mi_response->set_content_type( 'text/html' ).
 * note: fixing this on client side wont work for SSL/https connections, it gives a warning

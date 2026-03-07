@@ -116,10 +116,14 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |  if (!modal) \{\n| &&
       |    modal = document.createElement("div");\n| &&
       |    modal.id = "progressModal";\n| &&
-      |    modal.style.cssText = "display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;justify-content:center;align-items:center;";\n| &&
+      |    modal.style.cssText = "display:none;position:fixed;top:0;left:0;" +\n| &&
+      |      "width:100%;height:100%;background:rgba(0,0,0,0.5);" +\n| &&
+      |      "z-index:9999;justify-content:center;align-items:center;";\n| &&
       |    const content = document.createElement("div");\n| &&
       |    content.id = "progressModalContent";\n| &&
-      |    content.style.cssText = "background:white;padding:20px;border-radius:8px;min-width:300px;text-align:center;box-shadow:0 4px 6px rgba(0,0,0,0.3);";\n| &&
+      |    content.style.cssText = "background:white;padding:20px;" +\n| &&
+      |      "border-radius:8px;min-width:300px;text-align:center;" +\n| &&
+      |      "box-shadow:0 4px 6px rgba(0,0,0,0.3);";\n| &&
       |    modal.appendChild(content);\n| &&
       |    document.body.appendChild(modal);\n| &&
       |  \}\n| &&

@@ -23,15 +23,8 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
     ls_content-value = sy-uname.
     ls_content-data_str = iv_text.
 
+* note: want this to happen without enqueue locks
     MODIFY zabapgit FROM ls_content.
-
-"     zcl_abapgit_persistence_db=>get_instance( )->modify(
-"       iv_type  = c_type
-"       iv_value = sy-uname
-"       iv_data  = iv_text ).
-
-" * and wait for releasing the lock
-"     COMMIT WORK AND WAIT.
 
   ENDMETHOD.
 
@@ -42,13 +35,7 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
 
 
   METHOD zif_abapgit_progress~off.
-
-    " zcl_abapgit_persistence_db=>get_instance( )->delete(
-    "   iv_type  = c_type
-    "   iv_value = sy-uname ).
-
-    " COMMIT WORK AND WAIT.
-
+    RETURN.
   ENDMETHOD.
 
 ENDCLASS.

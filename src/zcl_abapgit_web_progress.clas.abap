@@ -18,13 +18,22 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
 
   METHOD zif_abapgit_progress~show.
 
-    DATA ls_content TYPE zabapgit.
-    ls_content-type  = c_type.
-    ls_content-value = sy-uname.
-    ls_content-data_str = iv_text.
+    DATA lr_content TYPE REF TO data.
+    FIELD-SYMBOLS <ls_content> TYPE any.
+    FIELD-SYMBOLS <lv_field> TYPE any.
+
+    CREATE DATA lr_content TYPE ('ZABAPGIT').
+    ASSIGN lr_content->* TO <ls_content>.
+
+    ASSIGN COMPONENT 'TYPE' OF STRUCTURE <ls_content> TO <lv_field>.
+    <lv_field> = c_type.
+    ASSIGN COMPONENT 'VALUE' OF STRUCTURE <ls_content> TO <lv_field>.
+    <lv_field> = sy-uname.
+    ASSIGN COMPONENT 'DATA_STR' OF STRUCTURE <ls_content> TO <lv_field>.
+    <lv_field> = iv_text.
 
 * note: want this to happen without enqueue locks
-    MODIFY zabapgit FROM ls_content.
+    MODIFY ('ZABAPGIT') FROM <ls_content>.
 
   ENDMETHOD.
 

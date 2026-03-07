@@ -32,7 +32,8 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
     ASSIGN COMPONENT 'DATA_STR' OF STRUCTURE <ls_content> TO <lv_field>.
     <lv_field> = iv_text.
 
-* note: want this to happen without enqueue locks
+* note: want this to happen without enqueue locks,
+* so this is done outside of the persistence class, which is where it would normally be done
     MODIFY ('ZABAPGIT') FROM <ls_content>.
 
   ENDMETHOD.

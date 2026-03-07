@@ -45,7 +45,21 @@ CLASS zcl_abapgit_web_progress IMPLEMENTATION.
 
 
   METHOD zif_abapgit_progress~off.
-    RETURN.
+
+    DATA lr_content TYPE REF TO data.
+    FIELD-SYMBOLS <ls_content> TYPE any.
+    FIELD-SYMBOLS <lv_field> TYPE any.
+
+    CREATE DATA lr_content TYPE ('ZABAPGIT').
+    ASSIGN lr_content->* TO <ls_content>.
+
+    ASSIGN COMPONENT 'TYPE' OF STRUCTURE <ls_content> TO <lv_field>.
+    <lv_field> = c_type.
+    ASSIGN COMPONENT 'VALUE' OF STRUCTURE <ls_content> TO <lv_field>.
+    <lv_field> = sy-uname.
+
+* delete persisted progress entry for this correlation key
+    DELETE ('ZABAPGIT') FROM <ls_content>.
   ENDMETHOD.
 
 ENDCLASS.

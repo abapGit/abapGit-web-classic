@@ -17,32 +17,35 @@ CLASS zcl_abapgit_html_viewer_web DEFINITION PUBLIC FINAL CREATE PUBLIC.
 ENDCLASS.
 
 
+
 CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
+
 
   METHOD constructor.
     mi_request = ii_request.
     mi_response = ii_response.
   ENDMETHOD.
 
+
   METHOD zif_abapgit_html_viewer~back.
     RETURN.
   ENDMETHOD.
+
 
   METHOD zif_abapgit_html_viewer~close_document.
     RETURN.
   ENDMETHOD.
 
+
   METHOD zif_abapgit_html_viewer~free.
     RETURN.
   ENDMETHOD.
 
-  METHOD zif_abapgit_html_viewer~set_focus.
-    RETURN.
-  ENDMETHOD.
 
   METHOD zif_abapgit_html_viewer~get_url.
     RETURN.
   ENDMETHOD.
+
 
   METHOD zif_abapgit_html_viewer~load_data.
 
@@ -54,13 +57,21 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
 
   ENDMETHOD.
 
+
+  METHOD zif_abapgit_html_viewer~set_focus.
+    RETURN.
+  ENDMETHOD.
+
+
   METHOD zif_abapgit_html_viewer~set_registered_events.
     RETURN.
   ENDMETHOD.
 
+
   METHOD zif_abapgit_html_viewer~set_visiblity.
     RETURN.
   ENDMETHOD.
+
 
   METHOD zif_abapgit_html_viewer~show_url.
 
@@ -97,6 +108,64 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |  \}                                                     \n| &&
       |\}                                                       \n| &&
       |registerForms();                                         \n| &&
+      |                                                   \n| &&
+      |const PROGRESS_INTERVAL = 200;\n| &&
+      |                                                   \n| &&
+      |function getOrCreateProgressModal() \{\n| &&
+      |  let modal = document.getElementById("progressModal");\n| &&
+      |  if (!modal) \{\n| &&
+      |    modal = document.createElement("div");\n| &&
+      |    modal.id = "progressModal";\n| &&
+      |    modal.style.cssText = "display:none;position:fixed;top:0;left:0;" +\n| &&
+      |      "width:100%;height:100%;background:rgba(0,0,0,0.5);" +\n| &&
+      |      "z-index:9999;justify-content:center;align-items:center;";\n| &&
+      |    const content = document.createElement("div");\n| &&
+      |    content.id = "progressModalContent";\n| &&
+      |    content.style.cssText = "background:white;padding:20px;" +\n| &&
+      |      "border-radius:8px;min-width:300px;text-align:center;" +\n| &&
+      |      "box-shadow:0 4px 6px rgba(0,0,0,0.3);";\n| &&
+      |    modal.appendChild(content);\n| &&
+      |    document.body.appendChild(modal);\n| &&
+      |  \}\n| &&
+      |  return modal;\n| &&
+      |\}\n| &&
+      |                                                   \n| &&
+      |function showProgressModal(text) \{\n| &&
+      |  const modal = getOrCreateProgressModal();\n| &&
+      |  const content = document.getElementById("progressModalContent");\n| &&
+      |  content.textContent = text;\n| &&
+      |  modal.style.display = "flex";\n| &&
+      |\}\n| &&
+      |                                                   \n| &&
+      |function hideProgressModal() \{\n| &&
+      |  const modal = document.getElementById("progressModal");\n| &&
+      |  if (modal) \{\n| &&
+      |    modal.style.display = "none";\n| &&
+      |  \}\n| &&
+      |\}\n| &&
+      |                                                   \n| &&
+      |function checkForProgress() \{\n| &&
+      |  console.dir("checkForProgress");\n| &&
+      |  fetch("/sap/zabapgit_statel", \{ keepalive: true \})\n| &&
+      |    .then(response => response.text())\n| &&
+      |    .then(data => \{\n| &&
+      |      console.dir(data);\n| &&
+      |      if (data && data.trim() !== "") \{\n| &&
+      |        showProgressModal(data);\n| &&
+      |      \} else \{\n| &&
+      |        hideProgressModal();\n| &&
+      |      \}\n| &&
+      |      setTimeout(checkForProgress, PROGRESS_INTERVAL);\n| &&
+      |    \});\n| &&
+      |\}\n| &&
+      |                                                   \n| &&
+      |window.onbeforeunload = () => \{\n| &&
+      |  console.dir("onbeforeunload"); \n| &&
+      |  setTimeout(checkForProgress, PROGRESS_INTERVAL);\n| &&
+      |\};\n| &&
+      |window.onunload = () => \{\n| &&
+      |  console.dir("onunload");\n| &&
+      |\};\n| &&
       |</script></body>\n|.
 
     IF lv_path = '/sap/zabapgit/css/bundle.css'.
@@ -105,6 +174,7 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
     ELSEIF lv_path = '/sap/zabapgit/' OR lv_path CP |/sap/zabapgit/sapevent:+*|.
       REPLACE FIRST OCCURRENCE OF |</body>| IN mv_html WITH lv_js.
       mi_response->set_content_type( 'text/html' ).
+* note: fixing this on client side won't work for SSL/https connections, it gives a warning
       REPLACE ALL OCCURRENCES OF 'action="sapevent:' IN mv_html WITH 'action="./sapevent:'.
       mi_response->set_cdata( mv_html ).
     ELSE.

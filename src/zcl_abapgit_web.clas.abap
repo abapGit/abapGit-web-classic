@@ -36,14 +36,14 @@ CLASS zcl_abapgit_web IMPLEMENTATION.
 
   METHOD handle.
 
-    DATA lv_found TYPE abap_bool.
-    DATA lv_path  TYPE string.
+    DATA lv_found    TYPE abap_bool.
+    DATA lv_path     TYPE string.
+    DATA li_progress TYPE REF TO zif_abapgit_progress.
 
     gi_request = ii_request.
     gi_response = ii_response.
 
     IF go_viewer IS INITIAL.
-
       CREATE OBJECT go_viewer
         EXPORTING
           ii_request  = ii_request
@@ -51,6 +51,9 @@ CLASS zcl_abapgit_web IMPLEMENTATION.
       zcl_abapgit_ui_core_injector=>set_html_viewer( go_viewer ).
 
       go_gui = zcl_abapgit_ui_factory=>get_gui( ).
+
+      CREATE OBJECT li_progress TYPE zcl_abapgit_web_progress.
+      zcl_abapgit_progress=>set_instance( li_progress ).
     ENDIF.
 
     lv_found = search_asset( ).

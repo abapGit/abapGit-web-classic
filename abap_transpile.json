@@ -23,6 +23,7 @@
         "/src/ui/routing/zcl_abapgit_gui_router.clas.*",
         "/src/ui/zcl_abapgit_frontend*.clas.*",
         "/src/ui/zcl_abapgit_popups.clas.*",
+        "/src/ui/core/z.*",
         "/src/ui/zcl_abapgit_ui_factory.clas.*",
         "/src/utils/zcl_abapgit_convert.clas.*",
         "/src/utils/zcl_abapgit_string_buffer.clas.*"

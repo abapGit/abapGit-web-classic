@@ -1,6 +1,7 @@
 import express from "express";
 import { initializeABAP } from "../output/init.mjs";
 import { cl_express_icf_shim } from "../output/cl_express_icf_shim.clas.mjs";
+import "../output/zcl_abapgit_ui_core_factory.clas.mjs";
 
 await initializeABAP();
 

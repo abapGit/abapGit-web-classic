@@ -2,7 +2,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "abaplint"
+    "abaplint": "abaplint",
+    "transpile": "abap_transpile",
+    "test": "npm run abaplint && npm run transpile"
   },
   "repository": {
     "type": "git",

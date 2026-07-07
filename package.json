@@ -4,6 +4,7 @@
   "scripts": {
     "abaplint": "abaplint",
     "transpile": "abap_transpile",
+    "start": "npm run transpile && node test/run.mjs",
     "test": "npm run abaplint && npm run transpile"
   },
   "repository": {
@@ -14,7 +15,8 @@
     "@abaplint/cli": "^2.119.57",
     "@abaplint/database-sqlite": "^2.11.78",
     "@abaplint/runtime": "^2.13.37",
-    "@abaplint/transpiler-cli": "^2.13.37"
+    "@abaplint/transpiler-cli": "^2.13.37",
+    "express": "^4.22.2"
   },
   "name": "abapgit-web-addon",
   "version": "1.0.0",

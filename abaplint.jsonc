@@ -19,6 +19,11 @@
       "url": "https://github.com/abapGit/abapGit",
       "files": "/src/**/*.*",
       "folder": "/lint_deps2"
+    },
+    {
+      "url": "https://github.com/open-abap/express-icf-shim",
+      "files": "/src/**/*.*",
+      "folder": "/lint_deps3"
     }
   ],
   "syntax": {

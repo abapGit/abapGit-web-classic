@@ -17,16 +17,10 @@
       "url": "https://github.com/abapGit/abapGit",
       "files": [
         "/src/**/zif_abapgit_*.intf.*",
-        "/src/ui/core/zcl_abapgit_gui*.clas.*",
-        "/src/ui/core/zcl_abapgit_html.clas.*",
-        "/src/ui/core/zcl_abapgit_html_parts.clas.*",
-        "/src/ui/routing/zcl_abapgit_gui_router.clas.*",
-        "/src/ui/zcl_abapgit_frontend*.clas.*",
-        "/src/ui/zcl_abapgit_popups.clas.*",
+        "/src/ui/routing/z.*",
+        "/src/ui/z.*",
         "/src/ui/core/z.*",
-        "/src/ui/zcl_abapgit_ui_factory.clas.*",
-        "/src/utils/zcl_abapgit_convert.clas.*",
-        "/src/utils/zcl_abapgit_string_buffer.clas.*"
+        "/src/utils/z.*"
       ]
     },
     {

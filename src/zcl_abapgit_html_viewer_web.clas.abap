@@ -109,6 +109,13 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |\}                                                       \n| &&
       |registerForms();                                         \n| &&
       |                                                   \n| &&
+      |document.addEventListener("keydown", function (e) \{     \n| &&
+      |  if (e.key === "F3") \{                                 \n| &&
+      |    e.preventDefault();                                  \n| &&
+      |    window.location.href = "./sapevent:go_back";         \n| &&
+      |  \}                                                     \n| &&
+      |\});                                                     \n| &&
+      |                                                   \n| &&
       |const PROGRESS_INTERVAL = 200;\n| &&
       |                                                   \n| &&
       |function getOrCreateProgressModal() \{\n| &&

@@ -1,0 +1,46 @@
+{
+  "$schema": "./node_modules/@abaplint/transpiler-cli/schema.json",
+  "input_folder": "src",
+  "input_filter": [],
+  "output_folder": "output",
+  "libs": [
+    {
+      "url": "https://github.com/open-abap/open-abap-core"
+    },
+    {
+      "url": "https://github.com/open-abap/open-abap-seo"
+    },
+    {
+      "url": "https://github.com/open-abap/open-abap-gui"
+    },
+    {
+      "url": "https://github.com/abapGit/abapGit",
+      "files": [
+        "/deps/**/*.*",
+        "/src/**/*.*"
+      ],
+      "exclude_filter": [
+        "zcl_abapgit_persist_migrate",
+        "zcl_abapgit_object_ecatt_super",
+        "zcl_abapgit_object_w3xx_super",
+        "/src/objects/ecatt/",
+        "/src/objects/zcl_abapgit_object_....\\.clas"
+      ]
+    },
+    {
+      "url": "https://github.com/open-abap/express-icf-shim",
+      "files": "/src/**/*.*"
+    }
+  ],
+  "write_unit_tests": true,
+  "write_source_map": true,
+  "options": {
+    "ignoreSyntaxCheck": false,
+    "setup": {
+      "filename": ""
+    },
+    "addFilenames": true,
+    "addCommonJS": true,
+    "unknownTypes": "runtimeError"
+  }
+}
